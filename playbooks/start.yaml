@@ -1,0 +1,8 @@
+- name: Lanzar inicio de ejecucion
+  hosts: all
+  become: true
+  roles:
+    - role: 'roles/Igit'
+    - role: 'roles/Ijq'
+    - role: 'roles/Pre-docker'
+    - role: 'roles/IdockerC'
