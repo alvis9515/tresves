@@ -1,0 +1,31 @@
+---
+ - name: Agregar repositorio de Docker
+   get_url:
+     url: https://download.docker.com/linux/rhel/docker-ce.repo
+     dest: /etc/yum.repos.d/docker-ce.repo
+     mode: '0644'
+
+ - name: Instalar Docker y compose
+   yum:
+     name:
+       - docker-ce
+       - docker-ce-cli
+       - containerd.io
+       - docker-buildx-plugin
+       - docker-compose-plugin
+     state: present
+
+ - name: Iniciar y habilitar el servicio Docker
+   systemd:
+     name: docker
+     state: started
+     enabled: yes
+
+ - name: Verificar versión de Docker
+   command: docker --version
+   register: docker_version
+   changed_when: false
+
+ - name: Mostrar versión de Docker insalada
+   debug:
+     msg: "Docker versión: {{ docker_version.stdout }}"
