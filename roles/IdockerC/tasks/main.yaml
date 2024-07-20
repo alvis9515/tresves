@@ -22,10 +22,10 @@
      enabled: yes
 
  - name: Verificar versión de Docker
-   command: docker --version
-   register: docker_version
+   command: docker compose version
+   register: docker_compose_version
    changed_when: false
 
  - name: Mostrar versión de Docker insalada
    debug:
-     msg: "Docker versión: {{ docker_version.stdout }}"
+     msg: "Docker compose versión: {{ docker_compose_version.stdout }}"
